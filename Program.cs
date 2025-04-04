@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Usar Cors
-//app.UseCors("AllowAngularApp");
+app.UseCors("AllowAngularApp");
 app.UseCors(policy =>
 {
     policy.WithOrigins("http://localhost:4200", "https://www.victormontesgarrido.com")
