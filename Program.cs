@@ -32,6 +32,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 //     });
 // });
 
+
 var app = builder.Build();
 
 // Configurar para que la aplicación funcione tanto en desarrollo como en producción
