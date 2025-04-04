@@ -12,25 +12,25 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Configurar CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngularApp", policy =>
-    {
-        var allowAnyOrigin = builder.Configuration.GetSection("Cors:AllowAnyOrigin").Get<string[]>();
-        if (allowAnyOrigin != null && allowAnyOrigin.Length > 0)
-        {
-            policy.WithOrigins(allowAnyOrigin).AllowAnyMethod().AllowAnyHeader();
-        }
-        else
-        {
-            // En producción, incluir también la URL de tu aplicación Angular desplegada
-            policy.WithOrigins(
-                "http://localhost:4200",
-                "https://www.victormontesgarrido.com" // Añade aquí la URL de tu frontend desplegado
-            ).AllowAnyMethod().AllowAnyHeader().AllowCredentials();
-        }
-    });
-});
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowAngularApp", policy =>
+//     {
+//         var allowAnyOrigin = builder.Configuration.GetSection("Cors:AllowAnyOrigin").Get<string[]>();
+//         if (allowAnyOrigin != null && allowAnyOrigin.Length > 0)
+//         {
+//             policy.WithOrigins(allowAnyOrigin).AllowAnyMethod().AllowAnyHeader();
+//         }
+//         else
+//         {
+//             // En producción, incluir también la URL de tu aplicación Angular desplegada
+//             policy.WithOrigins(
+//                 "http://localhost:4200",
+//                 "https://www.victormontesgarrido.com" // Añade aquí la URL de tu frontend desplegado
+//             ).AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+//         }
+//     });
+// });
 
 var app = builder.Build();
 
@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Usar Cors
-app.UseCors("AllowAngularApp");
+//app.UseCors("AllowAngularApp");
 app.UseCors(policy =>
 {
     policy.WithOrigins("http://localhost:4200", "https://www.victormontesgarrido.com")
