@@ -44,11 +44,7 @@ namespace PorfolioApi.Controllers
                 return StatusCode(500, new { error = "Error al enviar los Correos email" });
             }
         }
-        [HttpGet]
-        public IActionResult Info()
-        {
-            return Ok("Usa POST para enviar el formulario de contacto.");
-        }
+        
     }
 }
 
