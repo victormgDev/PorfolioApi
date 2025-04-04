@@ -21,17 +21,34 @@ namespace PortfolioApi.Services
 
         public EmailService(IConfiguration configuration)
         {
-            _smtpServer = configuration["EmailSettings:SmtpServer"];
-            _smtpPort = int.Parse(configuration["EmailSettings:SmtpPort"]);
-            _smtpUsername = configuration["EmailSettings:SmtpUsername"];
-            _smtpPassword = configuration["EmailSettings:SmtpPassword"];
-            _adminEmail = configuration["EmailSettings:AdminEmail"];
+            // Intentar obtener de las variables de entorno primero, luego de la configuración
+            _smtpServer = Environment.GetEnvironmentVariable("EMAIL_SMTP_SERVER") 
+                ?? configuration["EmailSettings:SmtpServer"];
+                
+            // Parsear el puerto, con valor predeterminado 587 si hay error
+            if (!int.TryParse(Environment.GetEnvironmentVariable("EMAIL_SMTP_PORT"), out _smtpPort))
+            {
+                if (!int.TryParse(configuration["EmailSettings:SmtpPort"], out _smtpPort))
+                {
+                    _smtpPort = 587; // Valor predeterminado
+                }
+            }
+            
+            _smtpUsername = Environment.GetEnvironmentVariable("EMAIL_USERNAME") 
+                ?? configuration["EmailSettings:SmtpUsername"];
+                
+            _smtpPassword = Environment.GetEnvironmentVariable("EMAIL_PASSWORD") 
+                ?? configuration["EmailSettings:SmtpPassword"];
+                
+            _adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL") 
+                ?? configuration["EmailSettings:AdminEmail"];
         }
 
         public async Task<bool> SendContactFormEmailsAsync(ContactFormModel model)
         {
             try
             {
+                // El resto del método permanece igual
                 // Enviar correo al administrador
                 var adminMessage = new MimeMessage();
                 adminMessage.From.Add(new MailboxAddress("Formulario de Contacto", _smtpUsername));
@@ -90,8 +107,10 @@ namespace PortfolioApi.Services
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                // Para depuración en entorno de desarrollo, considera registrar la excepción
+                Console.WriteLine($"Error enviando email: {ex.Message}");
                 return false;
             }
         }

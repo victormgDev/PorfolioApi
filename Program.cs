@@ -25,7 +25,9 @@ builder.Services.AddCors(options =>
         }
         else
         {
-            policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+            policy.WithOrigins("http://localhost:4200",
+                "https://www.victormontesgarrido.com")
+                .AllowAnyMethod().AllowAnyHeader();
 
         }
     });
