@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     {
         // En producción, permitir el acceso solo desde los orígenes específicos
         policy.WithOrigins(
-                "http://localhost:4200", 
+                //"http://localhost:4200", 
                 "https://www.victormontesgarrido.com" // URL del frontend en producción
             )
             .AllowAnyMethod() // Permitir cualquier método HTTP
