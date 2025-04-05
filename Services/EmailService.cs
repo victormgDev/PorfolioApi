@@ -51,9 +51,10 @@ namespace PortfolioApi.Services
                 // El resto del método permanece igual
                 // Enviar correo al administrador
                 var adminMessage = new MimeMessage();
-                adminMessage.From.Add(new MailboxAddress("Formulario de Contacto", _smtpUsername));
+                adminMessage.From.Add(new MailboxAddress("PortFolio Victor", _smtpUsername));
                 adminMessage.To.Add(new MailboxAddress("Admin", _adminEmail));
-                adminMessage.Subject = $"Nuevo mensaje de contacto: {model.Subject}";
+                adminMessage.Subject = $"Nuevo mensaje de {model.Name}: {model.Subject}";
+                adminMessage.ReplyTo.Add(new MailboxAddress(model.Name, model.Email));
 
                 var adminBodyBuilder = new BodyBuilder
                 {
@@ -71,14 +72,14 @@ namespace PortfolioApi.Services
 
                 // Enviar correo al usuario
                 var userMessage = new MimeMessage();
-                userMessage.From.Add(new MailboxAddress("Victor Montes", _smtpUsername));
+                userMessage.From.Add(new MailboxAddress("PortFolio Victor", _smtpUsername));
                 userMessage.To.Add(new MailboxAddress(model.Name, model.Email));
                 userMessage.Subject = "Gracias por contactar con Victor Montes";
 
                 var userBodyBuilder = new BodyBuilder
                 {
-                    HtmlBody = $@"
-                        <h2>¡Gracias por ponerte en contacto!</h2>
+                    HtmlBody = $@"                    
+                        <h2><span style=""color:#0DCAF0FF"">¡Gracias por ponerte en contacto!</span></h2>
                         <p>Hola {model.Name},</p>
                         <p>He recibido tu mensaje, responderé lo antes posible.</p>
                         <p>A continuación encontrarás una copia de tu mensaje:</p>
@@ -88,6 +89,11 @@ namespace PortfolioApi.Services
                         <br>
                         <p>Un cordial saludo.</p>
                         <p>Victor Montes</p>
+                        <br>
+                        <a href=""https://www.victormontesgarrido.com"" target=""_blank"">
+                        <img style=""width:auto; height:80px"" src=""https://www.victormontesgarrido.com/assets/logoMail.png"" />
+                        www.victormontesgarrido.com
+                        </a>                                    
                     "
                 };
 
