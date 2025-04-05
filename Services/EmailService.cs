@@ -88,8 +88,7 @@ namespace PortfolioApi.Services
                         <p>{model.Message}</p>
                         <br>
                         <p>Un cordial saludo.</p>
-                        <p>Victor Montes</p>
-                        <br>
+                        <p>Victor Montes</p>                      
                         <a href=""https://www.victormontesgarrido.com"" target=""_blank"">
                         <img style=""width:auto; height:80px"" src=""https://www.victormontesgarrido.com/assets/logoMail.png"" />
                         www.victormontesgarrido.com
