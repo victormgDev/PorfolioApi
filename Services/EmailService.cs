@@ -83,12 +83,15 @@ namespace PortfolioApi.Services
                         <p>Hola {model.Name},</p>
                         <p>He recibido tu mensaje, responderé lo antes posible.</p>
                         <p>A continuación encontrarás una copia de tu mensaje:</p>
+                        <p>Un cordial saludo.</p>
+                        <p>Victor Montes</p>  
+                        <br>
+                        <p>-----------------------------------------</p>
                         <p><strong>Asunto:</strong> {model.Subject}</p>
                         <p><strong>Mensaje:</strong></p>
                         <p>{model.Message}</p>
                         <br>
-                        <p>Un cordial saludo.</p>
-                        <p>Victor Montes</p>                      
+                                            
                         <a href=""https://www.victormontesgarrido.com"" target=""_blank"">
                         <img style=""width:auto; height:80px"" src=""https://www.victormontesgarrido.com/assets/logoMail.png"" />
                         www.victormontesgarrido.com
