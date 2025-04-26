@@ -51,7 +51,7 @@ namespace PortfolioApi.Services
                 // El resto del método permanece igual
                 // Enviar correo al administrador
                 var adminMessage = new MimeMessage();
-                adminMessage.From.Add(new MailboxAddress("PortFolio Victor", _smtpUsername));
+                adminMessage.From.Add(new MailboxAddress("PortFolio Víctor", _smtpUsername));
                 adminMessage.To.Add(new MailboxAddress("Admin", _adminEmail));
                 adminMessage.Subject = $"Nuevo mensaje de {model.Name}: {model.Subject}";
                 adminMessage.ReplyTo.Add(new MailboxAddress(model.Name, model.Email));
@@ -74,7 +74,7 @@ namespace PortfolioApi.Services
                 var userMessage = new MimeMessage();
                 userMessage.From.Add(new MailboxAddress("PortFolio Victor", _smtpUsername));
                 userMessage.To.Add(new MailboxAddress(model.Name, model.Email));
-                userMessage.Subject = "Gracias por contactar con Victor Montes";
+                userMessage.Subject = "Gracias por contactar con Victor Montes Garrido";
 
                 var userBodyBuilder = new BodyBuilder
                 {
@@ -84,7 +84,7 @@ namespace PortfolioApi.Services
                         <p>He recibido tu mensaje, responderé lo antes posible.</p>
                         <p>A continuación encontrarás una copia de tu mensaje:</p>
                         <p>Un cordial saludo.</p>
-                        <p>Victor Montes</p>  
+                        <p>Victor Montes Garrido</p>  
                         <br>
                         <p>-----------------------------------------</p>
                         <p><strong>Asunto:</strong> {model.Subject}</p>
